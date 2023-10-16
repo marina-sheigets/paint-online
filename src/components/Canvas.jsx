@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import canvasState from '../store/canvasState';
 import toolState from '../store/toolState';
 import Brush from '../tools/brush';
-
+import Modal from './Modal.jsx';
 const Canvas = observer(() => {
 	const canvasRef = useRef();
 	useEffect(() => {
@@ -17,6 +17,7 @@ const Canvas = observer(() => {
 	};
 	return (
 		<div className='canvas'>
+			<Modal />
 			<canvas
 				onMouseDown={mouseDownHandler}
 				ref={canvasRef}

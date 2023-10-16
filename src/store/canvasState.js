@@ -4,10 +4,14 @@ class CanvasState {
 	canvas = null;
 	undoList = []; // actions we made
 	redoList = []; //actions we undo
+	username = '';
 	constructor() {
 		makeAutoObservable(this);
 	}
 
+	setUsername(value) {
+		this.username = value;
+	}
 	setCanvas(canvas) {
 		this.canvas = canvas;
 	}
