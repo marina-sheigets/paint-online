@@ -1,3 +1,5 @@
+import '../styles/canvas.scss';
+
 function Canvas() {
 	return (
 		<div className='canvas'>

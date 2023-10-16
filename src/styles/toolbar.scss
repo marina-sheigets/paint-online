@@ -9,6 +9,19 @@
 	width: 100%;
 	box-shadow: 0 4px 5px gray;
 	z-index: 10;
+
+	&__btn {
+		width: 35px;
+		height: 35px;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		background-color: white;
+	}
+
+	.undo {
+		margin-left: auto;
+	}
 }
 
 .setting-bar {
