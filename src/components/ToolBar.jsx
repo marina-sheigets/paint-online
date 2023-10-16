@@ -10,6 +10,10 @@ import Circle from '../tools/circle';
 import Eraser from '../tools/eraser';
 import Line from '../tools/line';
 function ToolBar() {
+	const changeColor = (e) => {
+		toolState.setStrokeColor(e.target.value);
+		toolState.setFillColor(e.target.value);
+	};
 	return (
 		<div className='toolbar'>
 			<button
@@ -37,7 +41,7 @@ function ToolBar() {
 				onClick={() => toolState.setTool(new Line(canvasState.canvas))}>
 				<AiOutlineLine />
 			</button>
-			<input type='color' />
+			<input type='color' onChange={changeColor} />
 			<button className='toolbar__btn undo'>
 				<BiUndo />
 			</button>
