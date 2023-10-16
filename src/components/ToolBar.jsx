@@ -42,10 +42,10 @@ function ToolBar() {
 				<AiOutlineLine />
 			</button>
 			<input type='color' onChange={changeColor} />
-			<button className='toolbar__btn undo'>
+			<button className='toolbar__btn undo' onClick={() => canvasState.undo()}>
 				<BiUndo />
 			</button>
-			<button className='toolbar__btn '>
+			<button className='toolbar__btn ' onClick={() => canvasState.redo()}>
 				<BiRedo />
 			</button>
 			<button className='toolbar__btn brush'>
