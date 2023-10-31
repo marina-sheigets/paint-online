@@ -19,7 +19,7 @@ function ModalWindow({ canvasRef }) {
 
 	useEffect(() => {
 		if (canvasState.username) {
-			const socket = new WebSocket('ws://localhost:5000/');
+			const socket = new WebSocket('ws://paint-server-tau.vercel.app');
 			canvasState.setSocket(socket);
 			canvasState.setSessionId(id);
 			toolState.setTool(new Brush(canvasRef.current, socket, id));

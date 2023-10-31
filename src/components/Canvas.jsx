@@ -13,7 +13,7 @@ const Canvas = observer(() => {
 	useEffect(() => {
 		canvasState.setCanvas(canvasRef.current);
 		toolState.setTool(new Brush(canvasRef.current));
-		axios.get(`http://localhost:5000/image?id=${params.id}`).then((res) => {
+		axios.get(`https://paint-server-tau.vercel.app/image?id=${params.id}`).then((res) => {
 			const img = new Image();
 			const ctx = canvasRef.current.getContext('2d');
 			img.src = res.data;
@@ -30,7 +30,7 @@ const Canvas = observer(() => {
 	};
 
 	const handleSendCurrentImg = () => {
-		axios.post(`http://localhost:5000/image?id=${params.id}`, {
+		axios.post(`https://paint-server-tau.vercel.app/image?id=${params.id}`, {
 			img: canvasRef.current.toDataURL(),
 		});
 	};
