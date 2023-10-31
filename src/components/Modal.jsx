@@ -54,7 +54,6 @@ function ModalWindow({ canvasRef }) {
 
 	const drawHandler = (msg) => {
 		const figure = msg.figure;
-		console.log(msg);
 		const ctx = canvasRef.current.getContext('2d');
 		switch (figure.type) {
 			case 'brush':

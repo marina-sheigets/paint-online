@@ -9,7 +9,80 @@ import Rect from '../tools/rect';
 import Circle from '../tools/circle';
 import Eraser from '../tools/eraser';
 import Line from '../tools/line';
+import { useState } from 'react';
 function ToolBar() {
+	const TOOLS = {
+		left: [
+			{
+				id: 0,
+				handleClick: () => {
+					toolState.setTool(
+						new Brush(canvasState.canvas, canvasState.socket, canvasState.sessionId)
+					);
+				},
+				Icon: <BsFillBrushFill />,
+			},
+			{
+				id: 1,
+				handleClick: () => {
+					toolState.setTool(
+						new Rect(canvasState.canvas, canvasState.socket, canvasState.sessionId)
+					);
+				},
+				Icon: <BsFillSquareFill />,
+			},
+			{
+				id: 2,
+				handleClick: () => {
+					toolState.setTool(
+						new Circle(canvasState.canvas, canvasState.socket, canvasState.sessionId)
+					);
+				},
+				Icon: <BsCircle />,
+			},
+			{
+				id: 3,
+				handleClick: () => {
+					toolState.setTool(
+						new Eraser(canvasState.canvas, canvasState.socket, canvasState.sessionId)
+					);
+				},
+				Icon: <BsEraserFill />,
+			},
+			{
+				id: 4,
+				handleClick: () => {
+					toolState.setTool(
+						new Line(canvasState.canvas, canvasState.socket, canvasState.sessionId)
+					);
+				},
+				Icon: <AiOutlineLine />,
+			},
+		],
+
+		right: [
+			{
+				className: 'toolbar__btn undo',
+				id: 5,
+				handleClick: () => canvasState.undo(),
+				Icon: <BiUndo />,
+			},
+			{
+				className: 'toolbar__btn',
+				id: 6,
+				handleClick: () => canvasState.redo(),
+				Icon: <BiRedo />,
+			},
+			{
+				className: 'toolbar__btn brush',
+				id: 7,
+				handleClick: () => download(),
+				Icon: <AiOutlineSave />,
+			},
+		],
+	};
+
+	const [selectedToolId, setSelectedToolId] = useState(0);
 	const changeColor = (e) => {
 		toolState.setFillColor(e.target.value);
 	};
@@ -25,61 +98,28 @@ function ToolBar() {
 	};
 	return (
 		<div className='toolbar'>
-			<button
-				className='toolbar__btn'
-				onClick={() =>
-					toolState.setTool(
-						new Brush(canvasState.canvas, canvasState.socket, canvasState.sessionId)
-					)
-				}>
-				<BsFillBrushFill />
-			</button>
-			<button
-				className='toolbar__btn'
-				onClick={() =>
-					toolState.setTool(
-						new Rect(canvasState.canvas, canvasState.socket, canvasState.sessionId)
-					)
-				}>
-				<BsFillSquareFill />
-			</button>
-			<button
-				className='toolbar__btn '
-				onClick={() =>
-					toolState.setTool(
-						new Circle(canvasState.canvas, canvasState.socket, canvasState.sessionId)
-					)
-				}>
-				<BsCircle />
-			</button>
-			<button
-				className='toolbar__btn'
-				onClick={() =>
-					toolState.setTool(
-						new Eraser(canvasState.canvas, canvasState.socket, canvasState.sessionId)
-					)
-				}>
-				<BsEraserFill />
-			</button>
-			<button
-				className='toolbar__btn'
-				onClick={() =>
-					toolState.setTool(
-						new Line(canvasState.canvas, canvasState.socket, canvasState.sessionId)
-					)
-				}>
-				<AiOutlineLine />
-			</button>
+			{TOOLS.left.map((tool) => (
+				<button
+					key={tool.id}
+					className={`toolbar__btn ${selectedToolId === tool.id && 'selected'}`}
+					onClick={() => {
+						tool.handleClick();
+						setSelectedToolId(tool.id);
+					}}>
+					{tool.Icon}
+				</button>
+			))}
 			<input type='color' onChange={changeColor} />
-			<button className='toolbar__btn undo' onClick={() => canvasState.undo()}>
-				<BiUndo />
-			</button>
-			<button className='toolbar__btn ' onClick={() => canvasState.redo()}>
-				<BiRedo />
-			</button>
-			<button className='toolbar__btn brush' onClick={() => download()}>
-				<AiOutlineSave />
-			</button>
+			{TOOLS.right.map((tool) => (
+				<button
+					key={tool.id}
+					className={tool.className}
+					onClick={() => {
+						tool.handleClick();
+					}}>
+					{tool.Icon}
+				</button>
+			))}
 		</div>
 	);
 }

@@ -17,8 +17,15 @@
 		outline: none;
 		cursor: pointer;
 		background-color: white;
+
+		&:hover {
+			background-color: rgb(206, 205, 205);
+		}
 	}
 
+	.selected {
+		background-color: rgb(206, 205, 205);
+	}
 	.undo {
 		margin-left: auto;
 	}
