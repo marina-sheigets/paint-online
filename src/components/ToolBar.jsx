@@ -13,6 +13,16 @@ function ToolBar() {
 	const changeColor = (e) => {
 		toolState.setFillColor(e.target.value);
 	};
+
+	const download = () => {
+		const dataUrl = canvasState.canvas.toDataURL();
+		const a = document.createElement('a');
+		a.href = dataUrl;
+		a.download = canvasState.sessionId + '.jpg';
+		document.body.appendChild(a);
+		a.click();
+		document.body.removeChild(a);
+	};
 	return (
 		<div className='toolbar'>
 			<button
@@ -67,7 +77,7 @@ function ToolBar() {
 			<button className='toolbar__btn ' onClick={() => canvasState.redo()}>
 				<BiRedo />
 			</button>
-			<button className='toolbar__btn brush'>
+			<button className='toolbar__btn brush' onClick={() => download()}>
 				<AiOutlineSave />
 			</button>
 		</div>
