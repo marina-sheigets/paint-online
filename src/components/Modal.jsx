@@ -5,11 +5,8 @@ import { useParams } from 'react-router-dom';
 import Brush from '../tools/brush';
 import toolState from '../store/toolState';
 import PropTypes from 'prop-types';
-import Rect from '../tools/rect';
-import Circle from '../tools/circle';
 import { Button } from 'react-bootstrap';
-import Eraser from '../tools/eraser';
-import Line from '../tools/line';
+import { drawFigure } from '../utils/drawFigure';
 
 function ModalWindow({ canvasRef }) {
 	const { id } = useParams();
@@ -55,66 +52,7 @@ function ModalWindow({ canvasRef }) {
 	const drawHandler = (msg) => {
 		const figure = msg.figure;
 		const ctx = canvasRef.current.getContext('2d');
-		switch (figure.type) {
-			case 'brush':
-				Brush.draw(
-					ctx,
-					figure.x,
-					figure.y,
-					figure.color,
-					figure.strokeColor,
-					figure.lineWidth
-				);
-				break;
-			case 'rect':
-				Rect.staticDraw(
-					ctx,
-					figure.x,
-					figure.y,
-					figure.width,
-					figure.height,
-					figure.color,
-					figure.strokeColor,
-					figure.lineWidth
-				);
-				break;
-			case 'circle':
-				Circle.staticDraw(
-					ctx,
-					figure.x,
-					figure.y,
-					figure.radius,
-					figure.color,
-					figure.strokeColor,
-					figure.lineWidth
-				);
-				break;
-			case 'eraser':
-				Eraser.draw(
-					ctx,
-					figure.x,
-					figure.y,
-					figure.color,
-					figure.strokeColor,
-					figure.lineWidth
-				);
-				break;
-			case 'line':
-				Line.staticDraw(
-					ctx,
-					figure.startX,
-					figure.startY,
-					figure.x,
-					figure.y,
-					figure.color,
-					figure.strokeColor,
-					figure.lineWidth
-				);
-				break;
-			case 'finish':
-				ctx.beginPath();
-				break;
-		}
+		drawFigure(figure, ctx);
 	};
 	return (
 		<>

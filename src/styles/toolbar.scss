@@ -40,4 +40,12 @@
 	width: 100%;
 	box-shadow: 0 4px 5px gray;
 	top: $toolbar-height;
+
+	label {
+		margin-right: 5px;
+	}
+
+	input {
+		margin-right: 1rem;
+	}
 }
