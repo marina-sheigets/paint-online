@@ -49,10 +49,12 @@ function ModalWindow({ canvasRef }) {
 				}
 			};
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [canvasState.username, id]);
 
 	const drawHandler = (msg) => {
 		const figure = msg.figure;
+		console.log(msg);
 		const ctx = canvasRef.current.getContext('2d');
 		switch (figure.type) {
 			case 'brush':
