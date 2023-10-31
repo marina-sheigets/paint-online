@@ -1,10 +1,10 @@
 import Canvas from './components/Canvas';
+import Notifications from './components/Notifications';
 import SettingBar from './components/SettingBar';
 import ToolBar from './components/ToolBar';
 import './styles/app.scss';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 function App() {
-	console.log('window', window.location);
 	return (
 		<BrowserRouter>
 			<div className='app'>
@@ -25,6 +25,7 @@ function Content() {
 			<ToolBar />
 			<SettingBar />
 			<Canvas />
+			<Notifications />
 		</>
 	);
 }

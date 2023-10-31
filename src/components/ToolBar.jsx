@@ -11,34 +11,53 @@ import Eraser from '../tools/eraser';
 import Line from '../tools/line';
 function ToolBar() {
 	const changeColor = (e) => {
-		toolState.setStrokeColor(e.target.value);
 		toolState.setFillColor(e.target.value);
 	};
 	return (
 		<div className='toolbar'>
 			<button
 				className='toolbar__btn'
-				onClick={() => toolState.setTool(new Brush(canvasState.canvas))}>
+				onClick={() =>
+					toolState.setTool(
+						new Brush(canvasState.canvas, canvasState.socket, canvasState.sessionId)
+					)
+				}>
 				<BsFillBrushFill />
 			</button>
 			<button
 				className='toolbar__btn'
-				onClick={() => toolState.setTool(new Rect(canvasState.canvas))}>
+				onClick={() =>
+					toolState.setTool(
+						new Rect(canvasState.canvas, canvasState.socket, canvasState.sessionId)
+					)
+				}>
 				<BsFillSquareFill />
 			</button>
 			<button
 				className='toolbar__btn '
-				onClick={() => toolState.setTool(new Circle(canvasState.canvas))}>
+				onClick={() =>
+					toolState.setTool(
+						new Circle(canvasState.canvas, canvasState.socket, canvasState.sessionId)
+					)
+				}>
 				<BsCircle />
 			</button>
 			<button
 				className='toolbar__btn'
-				onClick={() => toolState.setTool(new Eraser(canvasState.canvas))}>
+				onClick={() =>
+					toolState.setTool(
+						new Eraser(canvasState.canvas, canvasState.socket, canvasState.sessionId)
+					)
+				}>
 				<BsEraserFill />
 			</button>
 			<button
 				className='toolbar__btn'
-				onClick={() => toolState.setTool(new Line(canvasState.canvas))}>
+				onClick={() =>
+					toolState.setTool(
+						new Line(canvasState.canvas, canvasState.socket, canvasState.sessionId)
+					)
+				}>
 				<AiOutlineLine />
 			</button>
 			<input type='color' onChange={changeColor} />

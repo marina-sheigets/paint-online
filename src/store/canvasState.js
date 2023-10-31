@@ -5,10 +5,30 @@ class CanvasState {
 	undoList = []; // actions we made
 	redoList = []; //actions we undo
 	username = '';
+
+	socket = null;
+	sessionId = null;
+
+	messages = [];
+
+	addMessage(message) {
+		this.messages.unshift(message);
+	}
+
+	deleteMessage() {
+		this.messages.pop();
+	}
 	constructor() {
 		makeAutoObservable(this);
 	}
 
+	setSessionId(value) {
+		this.sessionId = value;
+	}
+
+	setSocket(value) {
+		this.socket = value;
+	}
 	setUsername(value) {
 		this.username = value;
 	}

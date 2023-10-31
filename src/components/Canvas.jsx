@@ -17,7 +17,7 @@ const Canvas = observer(() => {
 	};
 	return (
 		<div className='canvas'>
-			<Modal />
+			<Modal canvasRef={canvasRef} />
 			<canvas
 				onMouseDown={mouseDownHandler}
 				ref={canvasRef}

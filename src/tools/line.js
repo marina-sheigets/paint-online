@@ -1,8 +1,8 @@
 import Tool from './tools';
 
 export default class Line extends Tool {
-	constructor(canvas) {
-		super(canvas);
+	constructor(canvas, socket, id) {
+		super(canvas, socket, id);
 		this.listen();
 	}
 
@@ -12,8 +12,33 @@ export default class Line extends Tool {
 		this.canvas.onmousedown = this.mouseDownHandler.bind(this);
 	}
 
-	mouseUpHandler() {
+	mouseUpHandler(e) {
 		this.mouseDown = false;
+		this.socket.send(
+			JSON.stringify({
+				method: 'draw',
+				id: this.id,
+				figure: {
+					type: 'line',
+					lineWidth: this.ctx.lineWidth,
+					color: this.ctx.fillStyle,
+					strokeColor: this.ctx.strokeStyle,
+					startX: this.currentX,
+					startY: this.currentY,
+					x: e.pageX - e.target.offsetLeft,
+					y: e.pageY - e.target.offsetTop,
+				},
+			})
+		);
+		this.socket.send(
+			JSON.stringify({
+				method: 'draw',
+				id: this.id,
+				figure: {
+					type: 'finish',
+				},
+			})
+		);
 	}
 
 	mouseDownHandler(e) {
@@ -42,5 +67,15 @@ export default class Line extends Tool {
 			this.ctx.lineTo(x, y);
 			this.ctx.stroke();
 		}.bind(this);
+	}
+
+	static staticDraw(ctx, startX, startY, x, y, color, strokeStyle, lineWidth) {
+		ctx.strokeStyle = strokeStyle;
+		ctx.fillStyle = color;
+		ctx.lineWidth = lineWidth;
+		ctx.beginPath();
+		ctx.moveTo(startX, startY);
+		ctx.lineTo(x, y);
+		ctx.stroke();
 	}
 }
